@@ -39,6 +39,8 @@ function Routes() {
             <Route exact path='/profile' >
                 <Profile currentUser={currentUser} />
             </Route>
+            <Route exact path='/logout' ></Route>
+            <Redirect to='/'></Redirect>
         </Switch>
     </BrowserRouter>
 }

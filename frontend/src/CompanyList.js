@@ -12,7 +12,7 @@ function CompanyList({companies}) {
                 {companies.map(c => (
                     <div>
                         <Link to={`/companies/${c.handle.toLowerCase()}`}>
-                            <CompanyCard company={c.handle} />
+                            <CompanyCard company={c} />
                         </Link>
                     </div>
             ))}
