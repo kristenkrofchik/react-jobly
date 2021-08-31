@@ -3,46 +3,50 @@ import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
 
 import Home from './Home';
 import CompanyList from './CompanyList';
-import FilterCompanyDetails from './FilterCompantDetails';
 import JobList from './JobList';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import Profile from './Profile';
+import PrivateRoute from './PrivateRoute';
 
-function Routes() {
+function Routes({ loginUser, signUpUser }) {
 
-    const[currentUser, updateCurrentUser] = useState();
-    const [companies, updateCompanies] = useState();
-    const [jobs, updateJobs] = useState();
 
+return (
     <BrowserRouter>
         <Switch>
             <Route exact path='/'>
-                <Home currentUser={currentUser} />
+                <Home />
             </Route>
-            <Route exact path='/companies'>
-                <CompanyList companies={companies} />
-            </Route>
-            <Route path='/companies/:company'>
-                <FilterCompanyDetails companies={companies} />
-            </Route>
-            <Redirect to='/companies' />
-            <Route exact path='/jobs'>
-                <JobList jobs={jobs} />
-            </Route>
+
             <Route exact path='/login' >
-                <LoginForm />
+                <LoginForm loginUser={loginUser}/>
             </Route>
+
             <Route exact path='/signup' >
-                <SignUpForm />
+                <SignUpForm signUpUser={signUpUser}/>
             </Route>
-            <Route exact path='/profile' >
-                <Profile currentUser={currentUser} />
-            </Route>
-            <Route exact path='/logout' ></Route>
+
+            <PrivateRoute exact path='/companies'>
+                <CompanyList />
+            </PrivateRoute>
+
+            <PrivateRoute path='/companies/:handle'>
+                <CompanyDetails />
+            </PrivateRoute>
+
+            <PrivateRoute exact path='/jobs'>
+                <JobList />
+            </PrivateRoute>
+
+            <PrivateRoute exact path='/profile' >
+                <Profile />
+            </PrivateRoute>
+
             <Redirect to='/'></Redirect>
         </Switch>
     </BrowserRouter>
-}
+    );
+};
 
 export default Routes;
