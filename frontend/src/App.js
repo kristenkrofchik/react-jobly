@@ -1,6 +1,9 @@
 import './App.css';
-import Home from '/Home';
+import React, { useState, useEffect } from 'react';
+
 import Nav from './Nav';
+import Routes from './Routes';
+
 
 function App() {
   return (
