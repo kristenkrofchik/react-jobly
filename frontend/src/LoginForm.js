@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Alert from './Alert';
 
 function LoginForm({ loginUser }) {
     const history= useHistory();
