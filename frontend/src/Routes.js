@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import React from 'react';
+import { Switch, Route, Redirect} from 'react-router-dom';
 
 import Home from './Home';
 import CompanyList from './CompanyList';
+import CompanyDetails from './CompanyDetails';
 import JobList from './JobList';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
@@ -13,7 +14,7 @@ function Routes({ loginUser, signUpUser }) {
 
 
 return (
-    <BrowserRouter>
+    <div className='Routes'>
         <Switch>
             <Route exact path='/'>
                 <Home />
@@ -45,7 +46,7 @@ return (
 
             <Redirect to='/'></Redirect>
         </Switch>
-    </BrowserRouter>
+    </div>
     );
 };
 
