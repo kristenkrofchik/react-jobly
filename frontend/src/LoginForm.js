@@ -7,7 +7,7 @@ function LoginForm({ loginUser }) {
     const [formData, setFormData] = useState({
         username: '',
         password: ''
-    )};
+    });
     const [formErrors, setFormErrors] = useState();
 
     async function handleSubmit(evt) {
@@ -38,10 +38,11 @@ function LoginForm({ loginUser }) {
                 {formErrors.length 
                     ? <Alert messages={formErrors} />
                     : null}
+
+                <button onSubmit={handleSubmit}>Submit</button>
             </form>
         </div>
     )
-
 };
 
 export default LoginForm;
