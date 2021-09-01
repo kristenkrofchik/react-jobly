@@ -38,9 +38,37 @@ function Profile() {
         setFormErrors([]);
 
         setCurrentUser(updatedUser);
-
     }
 
+    function handleChange(evt) {
+        const {name, value} = evt.target;
+        setFormData(f => ({...f, [name]: value}));
+        setFormErrors([]);
+    }
+
+    return (
+        <div className='Profile'>
+            <h3>Profile</h3>
+            <form>
+                <label>Username</label>
+                <p name='username'>{formData.username}</p> />
+
+                <label>First Name</label>
+                <input name='firstName' value={formData.firstName} onChange={handleChange} />
+
+                <label>Last Name</label>
+                <input name='lastName' value={formData.lastName} onChange={handleChange} />
+
+                <label>Email</label>
+                <input name='email' value={formData.email} onChange={handleChange} />
+
+                <label>Confirm Password to Make Changes:</label>
+                <input name='password' value={formData.password} onChange={handleChange} />
+
+            
+            </form>
+        </div>
+    )
 }
 
 export default Profile;
