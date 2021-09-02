@@ -68,7 +68,7 @@ class JoblyApi {
   }
 
   /** Save updated profile */
-  static async saveProfile(data) {
+  static async saveProfile(username, data) {
     let res = await this.request(`users/${username}`, data, 'patch');
     return res.user;
   }
@@ -77,6 +77,11 @@ class JoblyApi {
   static async getCurrentUser(username) {
     let res = await this.request(`users/${username}`);
     return res.user;
+  }
+
+  /** Apply to job */
+  static async applyToJob(username, id) {
+    let res = await this.request(`users/${username}/jobs/${id}`, {}, 'post');
   }
 
 }
