@@ -1,17 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import UserContext from './UserContext';
 
-function Nav() {
+function Nav({logout}) {
+    const { currentUser } = useContext(UserContext);
+
+    function loggedInNav() {
+        return (
+            <ul>
+                <li>
+                    <NavLink to='/companies'>Companies</NavLink>
+                </li>
+                <li>
+                    <NavLink to='/jobs'>Jobs</NavLink>
+                </li>
+                <li>
+                    <NavLink to='/profile'>Profile</NavLink>
+                </li>
+                <li>
+                    <Link to='/' onClick={logout}>Log out {currentUser.username}</Link>
+                </li>
+            </ul>
+        );
+    };
+
+    function loggedOutNav() {
+        return (
+            <ul>
+                <li>
+                    <NavLink to='/login'>Login</NavLink>
+                </li>
+                <li>
+                    <NavLink to='signup'>Sign Up</NavLink>
+                </li>
+            </ul>
+        );
+    }
+
     return (
-        <ul>
-            <li><Link to='/'>Jobly</Link></li>
-            <li><Link to='/companies'>Companies</Link></li>
-            <li><Link to='/jobs'>Jobs</Link></li>
-            <li><Link to='/profile'>Profile</Link></li>
-            <li><Link to='/login'>Login</Link></li>
-            <li><Link to='/signup'>Sign Up</Link></li>
-            <li><Link to='/'>Log out</Link></li>
-        </ul>
+        <nav>
+            <Link to='/'>Jobly</Link>
+            {currentUser ? loggedInNav() : loggedOutNav()}
+        </nav>
     );
 }
 
