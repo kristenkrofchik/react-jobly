@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import JoblyApi from './api';
 import UserContext from './UserContext';
+import Alert from './Alert';
 
 
 function Profile() {
@@ -13,6 +14,7 @@ function Profile() {
     });
 
     const [formErrors, setFormErrors] = useState([]);
+    const [saveConfirmed, setSaveConfirmed] = useState(false);
 
     async function handleSubmit(evt) {
         evt.preventDefault();
@@ -36,6 +38,7 @@ function Profile() {
 
         setFormData(f => ({...f, password: ''}));
         setFormErrors([]);
+        setSaveConfirmed(true);
 
         setCurrentUser(updatedUser);
     }
@@ -65,7 +68,16 @@ function Profile() {
                 <label>Confirm Password to Make Changes:</label>
                 <input name='password' value={formData.password} onChange={handleChange} />
 
-            
+                {formErrors.length 
+                    ? <Alert messages={formErrors} />
+                    : null}
+
+                {saveConfirmed
+                    ? <Alert messasges={['Profile Updated!']} />
+                    : null}
+                
+                <button onClick={handleSubmit}>Submit</button>
+                
             </form>
         </div>
     )
